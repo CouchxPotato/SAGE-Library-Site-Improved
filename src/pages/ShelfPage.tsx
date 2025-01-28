@@ -2,14 +2,17 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { books } from '../data/books';
 import { BookOpenCheck, Library, ArrowLeft } from 'lucide-react';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function ShelfPage() {
   const { shelfId } = useParams();
   const shelfBooks = books.filter(book => book.shelf_no === Number(shelfId));
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-uni-yellow to-uni-orange">
-      <header className="bg-gradient-to-r from-uni-maroon to-uni-red text-white py-6 px-4">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-uni-yellow to-uni-orange
+    dark:from-slate-900 dark:to-uni-maroon transition-colors duration-300">
+      <header className="bg-gradient-to-r from-uni-maroon to-uni-red text-white py-6 px-4
+      dark:from-slate-900 dark:to-uni-maroon text-white">
         <div className="max-w-4xl mx-auto">
           <Link 
             to="/"
@@ -26,6 +29,7 @@ export function ShelfPage() {
               <p className="text-uni-gold text-sm">Shelf {shelfId}</p>
             </div>
           </div>
+          <ThemeToggle />
         </div>
       </header>
 
@@ -56,7 +60,10 @@ export function ShelfPage() {
         </div>
       </main>
 
-      <footer className="bg-gradient-to-r from-uni-maroon to-uni-red text-white py-4 mt-auto">
+      <footer
+        className="bg-gradient-to-r from-uni-maroon to-uni-red 
+                       dark:from-slate-900 dark:to-uni-maroon text-white mt-auto py-6"
+      >
         <div className="max-w-4xl mx-auto px-4 text-center text-sm">
           <p>© 2024 SAGE University, Bhopal. All rights reserved.</p>
         </div>

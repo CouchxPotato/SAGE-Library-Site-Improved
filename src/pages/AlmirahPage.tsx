@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { almirahs } from '../data/books';
 import { Library, ArrowLeft, BookOpen } from 'lucide-react';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export function AlmirahPage() {
   const { almirahId } = useParams();
@@ -21,8 +22,10 @@ export function AlmirahPage() {
   }, {} as Record<number, typeof almirah.books>);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-uni-yellow/20">
-      <header className="bg-gradient-to-r from-uni-maroon to-uni-red text-white py-6 px-4">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-white to-uni-yellow/20
+    dark:from-slate-900 dark:to-uni-maroon transition-colors duration-300">
+      <header className="bg-gradient-to-r from-uni-maroon to-uni-red text-white py-6 px-4
+      dark:from-slate-900 dark:to-uni-maroon text-white">
         <div className="max-w-6xl mx-auto">
           <Link 
             to="/"
@@ -38,7 +41,11 @@ export function AlmirahPage() {
               <h1 className="text-2xl font-bold">SAGE Central Library</h1>
               <p className="text-uni-yellow text-sm">Almirah {almirahId}</p>
             </div>
+            <div className="ml-auto"> {/* This will push ThemeToggle to the right */}
+          <ThemeToggle />
+        </div>
           </div>
+          
         </div>
       </header>
 
@@ -81,9 +88,12 @@ export function AlmirahPage() {
         </div>
       </main>
 
-      <footer className="bg-gradient-to-r from-uni-maroon to-uni-red text-white py-4">
+      <footer
+        className="bg-gradient-to-r from-uni-maroon to-uni-red 
+                       dark:from-slate-900 dark:to-uni-maroon text-white mt-auto py-6"
+      >
         <div className="max-w-6xl mx-auto px-4 text-center text-sm">
-          <p>© 2025 SAGE University, Bhopal. All rights reserved.</p>
+          <p className="text-uni-yellow">© 2025 SAGE University, Bhopal. All rights reserved.</p>
         </div>
       </footer>
     </div>

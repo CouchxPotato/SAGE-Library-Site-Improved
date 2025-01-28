@@ -1,7 +1,7 @@
 import React from 'react';
 import { almirahs } from './data/books';
 import { Almirah } from './components/Almirah';
-
+import { ThemeToggle } from './components/ThemeToggle';
 export default function App() {
   return (
     <div
@@ -30,6 +30,7 @@ export default function App() {
                 </p>
               </div>
             </div>
+            <ThemeToggle />
           </div>
         </div>
       </header>
@@ -49,7 +50,10 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="mt-auto bg-gradient-to-r from-uni-maroon to-uni-red text-white py-6">
+      <footer
+        className="bg-gradient-to-r from-uni-maroon to-uni-red 
+                       dark:from-slate-900 dark:to-uni-maroon text-white mt-auto py-6"
+      >
         <div className="max-w-6xl mx-auto px-4 text-center">
           <p className="text-uni-yellow">
             © 2025 SAGE University, Bhopal. All rights reserved.
