@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+/* Button hover effects */
+.btn-hover {
+  @apply relative overflow-hidden transition-all duration-300 active:scale-95;
+}
+
+.btn-hover::after {
+  content: '';
+  @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+}
+
+.btn-hover:hover::after {
+  @apply opacity-20;
+}
+
+.btn-hover:active::after {
+  @apply opacity-30;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 ease-out hover:shadow-xl;
+  transform: perspective(1000px) rotateX(0) rotateY(0);
+}
+
+.card-hover:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-5px);
+}
+
+/* Almirah animations */
+.almirah-enter {
+  opacity: 0;
+  transform: scale(0.9) translateY(20px);
+}
+
+.almirah-enter-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom scrollbar */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: #1e40af #eff6ff;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #eff6ff;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #1e40af;
+  border-radius: 3px;
+}
+
+/* Book item animations */
+.book-item {
+  @apply transition-all duration-300 ease-out;
+}
+
+.book-item:hover {
+  @apply -translate-y-1 shadow-lg;
+  transform: perspective(800px) rotateX(2deg);
+}
