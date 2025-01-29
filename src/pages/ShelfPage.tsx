@@ -34,7 +34,7 @@ export function ShelfPage() {
       </header>
 
       <main className="flex-grow max-w-4xl mx-auto px-4 py-8 w-full">
-        <div className="bg-white rounded-xl shadow-xl p-8">
+        <div className="bg-white rounded-xl shadow-xl p-8 min-h-[400px]">
           <div className="flex items-center gap-3 mb-8">
             <BookOpenCheck className="w-8 h-8 text-uni-red" />
             <h2 className="text-2xl font-bold text-slate-800">
@@ -48,7 +48,7 @@ export function ShelfPage() {
                 key={book.id}
                 className="p-6 bg-gradient-to-br from-uni-yellow to-uni-gold rounded-xl
                          hover:from-uni-orange hover:to-uni-red transition-all duration-300
-                         transform hover:-translate-y-1 hover:shadow-lg"
+                         transform hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between h-full"
               >
                 <h3 className="text-xl font-semibold text-slate-800 mb-2">
                   {book.book_name}
@@ -64,8 +64,13 @@ export function ShelfPage() {
         className="bg-gradient-to-r from-uni-maroon to-uni-red 
                        dark:from-slate-900 dark:to-uni-maroon text-white mt-auto py-6"
       >
-        <div className="max-w-4xl mx-auto px-4 text-center text-sm">
-          <p>© 2024 SAGE University, Bhopal. All rights reserved.</p>
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p className="text-uni-yellow">
+            © 2025 SAGE University, Bhopal. All rights reserved.
+          </p>
+          <p className="text-uni-gold/80 text-sm mt-2">
+            Digital Library Navigation System
+          </p>
         </div>
       </footer>
     </div>
