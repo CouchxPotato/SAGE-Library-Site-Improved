@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Almirah as AlmirahType } from '../data/books';
-import { BookMarked, BookOpenCheck, ExternalLink } from 'lucide-react';
+import { BookMarked, BookOpenCheck, ExternalLink, SplitSquareVertical } from 'lucide-react';
 
 interface AlmirahProps {
   almirah: AlmirahType;
@@ -12,8 +12,14 @@ export function Almirah({ almirah }: AlmirahProps) {
   const almirahPageUrl = `/almirah/${almirah.id}`;
   const qrCodeUrl = `${window.location.origin}${almirahPageUrl}`;
 
-  const totalBooks = almirah.books.length;
-  const shelves = [...new Set(almirah.books.map(book => book.shelf))].length;
+  const totalBooks = 
+    almirah.subAlmirahs.a.books.length + 
+    almirah.subAlmirahs.b.books.length;
+
+  const uniqueShelves = new Set([
+    ...almirah.subAlmirahs.a.books.map(book => book.shelf),
+    ...almirah.subAlmirahs.b.books.map(book => book.shelf)
+  ]);
 
   return (
     <div className="relative perspective-1000">
@@ -22,7 +28,7 @@ export function Almirah({ almirah }: AlmirahProps) {
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10 bg-gradient-to-b from-uni-maroon to-uni-red 
                     text-white px-4 py-1.5 rounded-lg shadow-lg border border-uni-orange
                     transform-gpu transition-all duration-300 group-hover:-translate-y-1">
-          <span className="text-lg font-bold whitespace-nowrap">Almirah {almirah.id}</span>
+          <span className="text-base font-bold whitespace-nowrap">Almirah {almirah.id}</span>
         </div>
 
         <div className="relative bg-white rounded-lg p-8 pt-12
@@ -42,15 +48,34 @@ export function Almirah({ almirah }: AlmirahProps) {
 
           <div className="relative flex flex-col items-center gap-4">
             <div className="bg-uni-yellow p-4 rounded-full shadow-inner transform-gpu transition-all duration-300 hover:scale-110 hover:rotate-12">
-              <BookOpenCheck className="w-10 h-10 text-uni-red" />
+              <SplitSquareVertical className="w-10 h-10 text-uni-red" />
             </div>
+
+            {/* Sub-Almirahs Summary */}
+            <div className="grid grid-cols-2 gap-4 w-full mb-4">
+              {/* Section A */}
+              <div className="bg-uni-yellow/10 p-3 rounded-lg">
+                <h4 className="text-sm font-semibold text-uni-maroon mb-2">Section A</h4>
+                <p className="text-xs text-uni-red/80">
+                  {almirah.subAlmirahs.a.books.length} books
+                </p>
+              </div>
+              {/* Section B */}
+              <div className="bg-uni-orange/10 p-3 rounded-lg">
+                <h4 className="text-sm font-semibold text-uni-maroon mb-2">Section B</h4>
+                <p className="text-xs text-uni-red/80">
+                  {almirah.subAlmirahs.b.books.length} books
+                </p>
+              </div>
+            </div>
+
             <div className="text-center space-y-4">
               <div className="flex flex-col items-center justify-center gap-2 text-slate-700">
                 <div className="flex items-center gap-2 transition-transform duration-300 hover:scale-105">
                   <BookMarked className="w-5 h-5" />
-                  <span className="font-medium">{totalBooks} books</span>
+                  <span className="font-medium">{totalBooks} total books</span>
                 </div>
-                <span className="text-sm text-slate-600">{shelves} shelves</span>
+                <span className="text-sm text-slate-600">{uniqueShelves.size} shelves</span>
               </div>
               
               {/* QR Code Section */}
