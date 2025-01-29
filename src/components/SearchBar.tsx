@@ -5,6 +5,7 @@ import { almirahs } from '../data/books';
 interface SearchResult {
   title: string;
   almirahId: string;
+  section: string;
   shelf: number;
 }
 
@@ -26,15 +27,18 @@ export function SearchBar() {
     const searchResults: SearchResult[] = [];
     const searchTerm = searchQuery.toLowerCase();
 
-    almirahs.forEach(almirah => {
-      almirah.books.forEach(book => {
-        if (book.title.toLowerCase().includes(searchTerm)) {
-          searchResults.push({
-            title: book.title,
-            almirahId: almirah.id,
-            shelf: book.shelf,
-          });
-        }
+    almirahs.forEach((almirah) => {
+      Object.entries(almirah.subAlmirahs).forEach(([section, subAlmirah]) => {
+        subAlmirah.books.forEach((book) => {
+          if (book.title.toLowerCase().includes(searchTerm)) {
+            searchResults.push({
+              title: book.title,
+              almirahId: almirah.id,
+              section: section.toUpperCase(),
+              shelf: book.shelf,
+            });
+          }
+        });
       });
     });
 
@@ -81,7 +85,7 @@ export function SearchBar() {
                     {result.title}
                   </h3>
                   <p className="text-sm text-uni-red/70 dark:text-uni-gold/70">
-                    Located in Almirah {result.almirahId}, Shelf {result.shelf}
+                    Located in Almirah {result.almirahId}, Section {result.section}, Shelf {result.shelf}
                   </p>
                 </div>
               ))}
